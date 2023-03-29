@@ -1,0 +1,3 @@
+[submodule "dissect.target"]
+	path = dissect.target
+	url = https://github.com/fox-it/dissect.target.git
