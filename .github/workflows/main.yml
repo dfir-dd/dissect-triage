@@ -40,7 +40,7 @@ jobs:
           target: ./
           
       - name: extract pyoxidize
-        run: 7z x pyoxidizer-${{ env.PYOXIDIZER_VERSION }}-x86_64-pc-windows-msvc.zip
+        run: 7z e pyoxidizer-${{ env.PYOXIDIZER_VERSION }}-x86_64-pc-windows-msvc.zip
         
       - name: build triage tool
         run: pyoxidizer build
