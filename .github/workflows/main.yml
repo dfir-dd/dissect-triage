@@ -40,13 +40,9 @@ jobs:
           target: ./
           
       - name: extract pyoxidize
-        run: 7z e pyoxidizer-${{ env.PYOXIDIZER_VERSION }}-x86_64-pc-windows-msvc.zip
-        
-      - name: What is up? What I am doing?
-        run: dir
-        
-      - name: build triage tool
-        run: pyoxidizer.exe build
+        run: |
+          7z e pyoxidizer-${{ env.PYOXIDIZER_VERSION }}-x86_64-pc-windows-msvc.zip
+          pyoxidizer.exe build
 
       - name: Archive Release
         uses: thedoctor0/zip-release@master
