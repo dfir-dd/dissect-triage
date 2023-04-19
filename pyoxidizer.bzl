@@ -3,8 +3,6 @@
 # https://gregoryszorc.com/docs/pyoxidizer/stable/pyoxidizer.html for details
 # of this configuration file format.
 
-import os
-
 # Configuration files consist of functions which define build "targets."
 # This function creates a Python executable and installs it in a destination
 # directory.
@@ -241,7 +239,7 @@ def make_exe():
     # objects to the binary, with a load location as defined by the packaging
     # policy's resource location attributes.
     #exe.add_python_resources(exe.pip_download(["pyflakes==2.2.0"]))
-    exe.add_python_resources(exe.pip_install([os.path.join(os.getcwd(), "dissect.target"), "acquire"]))
+    exe.add_python_resources(exe.pip_install(["dissect.target", "acquire"]))
 
     # Invoke `pip install` with our Python distribution to install a single package.
     # `pip_install()` returns objects representing installed files.
@@ -259,7 +257,7 @@ def make_exe():
     # context, taking just the resources belonging to the `foo` and `bar`
     # Python packages.
     exe.add_python_resources(exe.read_package_root(
-        path="Z:/my-acquire-bin/",
+        path="./",
         packages=["triage"],
     ))
 
