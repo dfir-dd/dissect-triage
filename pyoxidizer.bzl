@@ -3,6 +3,8 @@
 # https://gregoryszorc.com/docs/pyoxidizer/stable/pyoxidizer.html for details
 # of this configuration file format.
 
+import os
+
 # Configuration files consist of functions which define build "targets."
 # This function creates a Python executable and installs it in a destination
 # directory.
