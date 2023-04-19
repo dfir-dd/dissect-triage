@@ -239,7 +239,7 @@ def make_exe():
     # objects to the binary, with a load location as defined by the packaging
     # policy's resource location attributes.
     #exe.add_python_resources(exe.pip_download(["pyflakes==2.2.0"]))
-    exe.add_python_resources(exe.pip_install(["Z:/my-acquire-bin/dissect.target/", "acquire"]))
+    exe.add_python_resources(exe.pip_install([os.path.join(os.getcwd(), "dissect.target"), "acquire"]))
 
     # Invoke `pip install` with our Python distribution to install a single package.
     # `pip_install()` returns objects representing installed files.
