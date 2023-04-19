@@ -43,7 +43,7 @@ jobs:
         run: |
           7z e pyoxidizer-${{ env.PYOXIDIZER_VERSION }}-x86_64-pc-windows-msvc.zip
           dir
-          pyoxidizer.exe build
+          ./pyoxidizer.exe build
 
       - name: Archive Release
         uses: thedoctor0/zip-release@master
