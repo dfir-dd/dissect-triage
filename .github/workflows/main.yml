@@ -53,6 +53,10 @@ jobs:
           filename: ${{ env.FILENAME }}-${{ steps.get_release.outputs.tag_name }}.zip
           exclusions: '*.git* /*node_modules/* .editorconfig'
 
+      - name: move archive to here
+        run: |
+          move build/x86_64-pc-windows-msvc/debug/install/${{ env.FILENAME }}-${{ steps.get_release.outputs.tag_name }}.zip .
+          
       - name: Upload Release Asset
         id: upload-zipfile 
         uses: actions/upload-release-asset@v1
