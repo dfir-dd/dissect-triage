@@ -32,6 +32,11 @@ jobs:
         uses: bruceadams/get-release@v1.2.3
         env:
           GITHUB_TOKEN: ${{ github.token }}
+
+      - name: Copy plugins list
+        id: copy_plugin_list
+        run: |
+          copy _pluginlist.py dissect.target/dissect/target/plugins
       
       - name: obtain pyoxidize
         uses: suisei-cn/actions-download-file@v1.3.0
@@ -43,19 +48,19 @@ jobs:
         run: |
           7z e pyoxidizer-${{ env.PYOXIDIZER_VERSION }}-x86_64-pc-windows-msvc.zip
           dir
-          ./pyoxidizer.exe build
+          ./pyoxidizer.exe build --release
 
       - name: Archive Release
         uses: thedoctor0/zip-release@master
         with:
           type: 'zip'
-          directory: build/x86_64-pc-windows-msvc/debug/install
+          directory: build/x86_64-pc-windows-msvc/release/install
           filename: ${{ env.FILENAME }}-${{ steps.get_release.outputs.tag_name }}.zip
           exclusions: '*.git* /*node_modules/* .editorconfig'
 
       - name: move archive to here
         run: |
-          move build/x86_64-pc-windows-msvc/debug/install/${{ env.FILENAME }}-${{ steps.get_release.outputs.tag_name }}.zip .
+          move build/x86_64-pc-windows-msvc/release/install/${{ env.FILENAME }}-${{ steps.get_release.outputs.tag_name }}.zip .
           
       - name: Upload Release Asset
         id: upload-zipfile 

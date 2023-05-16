@@ -10,7 +10,7 @@ def make_exe():
     # Obtain the default PythonDistribution for our build target. We link
     # this distribution into our produced executable and extract the Python
     # standard library from it.
-    dist = default_python_distribution(flavor = "standalone_dynamic" )
+    dist = default_python_distribution()
 
     # This function creates a `PythonPackagingPolicy` instance, which
     # influences how executables are built and how resources are added to
@@ -87,7 +87,7 @@ def make_exe():
     # an optional fallback.
 
     # Use in-memory location for adding resources by default.
-    policy.resources_location = "in-memory"
+    # policy.resources_location = "in-memory"
 
     # Use filesystem-relative location for adding resources by default.
     # policy.resources_location = "filesystem-relative:prefix"
@@ -193,6 +193,7 @@ def make_exe():
     # python_config.run_command = ""
 
     # Run a Python module as __main__ when the interpreter starts.
+    # python_config.run_module = "acquire.acquire"
     python_config.run_module = "triage"
 
     # Run a Python file when the interpreter starts.
@@ -239,7 +240,7 @@ def make_exe():
     # objects to the binary, with a load location as defined by the packaging
     # policy's resource location attributes.
     #exe.add_python_resources(exe.pip_download(["pyflakes==2.2.0"]))
-    exe.add_python_resources(exe.pip_install(["dissect.target", "acquire"]))
+    exe.add_python_resources(exe.pip_install([CWD + "\\dissect.target", "acquire"]))
 
     # Invoke `pip install` with our Python distribution to install a single package.
     # `pip_install()` returns objects representing installed files.

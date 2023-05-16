@@ -34,6 +34,8 @@ def main():
     sys.argv.append("--quarantined")
     sys.argv.append("--remoteaccess")
     sys.argv.append("--wer")
+    sys.argv.append("--handles")
+    sys.argv.append("local")
     
     acquire.main()
 
