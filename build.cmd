@@ -1,3 +1,7 @@
+:: create self signed certificate with
+:: New-SelfSignedCertificate -Subject "Telekom MMS Incident Response Service" -NotAfter (Get-Date).AddMonths(24) -Type CodeSigningCert
+::
+
 set CARGO_MANIFEST_DIR=.
 set TARGET=x86_64-pc-windows-msvc
 set PROFILE=release
