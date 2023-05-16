@@ -324,14 +324,14 @@ def register_code_signers():
     # sha1_thumbprint = prompt_input(
     #     "SHA-1 thumbprint of code signing certificate in Windows store"
     # )
-    # signer = code_signer_from_windows_store_sha1_thumbprint(sha1_thumbprint)
+    signer = code_signer_from_windows_store_sha1_thumbprint("BC7AB3BF6644AB39DB163E806122365977490D36")
 
     # Choose a code signing certificate automatically from the Windows
     # certificate store.
     # signer = code_signer_from_windows_store_auto()
 
     # Activate your signer so it gets called automatically.
-    # signer.activate()
+    signer.activate()
 
 
 # Call our function to set up automatic code signers.
