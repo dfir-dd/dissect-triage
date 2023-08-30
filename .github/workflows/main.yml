@@ -38,6 +38,7 @@ jobs:
       - name: Copy plugins list
         id: copy_plugin_list
         run: |
+          ls -R "$GITHUB_WORKSPACE"
           copy _pluginlist.py "$GITHUB_WORKSPACE/dissect.target/dissect/target/plugins"
       
       - name: obtain pyoxidize
