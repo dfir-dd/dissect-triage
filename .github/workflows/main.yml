@@ -38,7 +38,7 @@ jobs:
       - name: Copy plugins list
         id: copy_plugin_list
         run: |
-          copy _pluginlist.py ${{ GITHUB_WORKSPACE }}/dissect.target/dissect/target/plugins
+          copy _pluginlist.py $GITHUB_WORKSPACE/dissect.target/dissect/target/plugins
       
       - name: obtain pyoxidize
         uses: suisei-cn/actions-download-file@v1.3.0
