@@ -4,7 +4,7 @@ name: Build triage binary
 
 env:
   PYOXIDIZER_VERSION: 0.24.0
-  FILENAME: windows_triage
+  FILENAME: full-acquire
 
 # Controls when the workflow will run
 on:
@@ -60,7 +60,7 @@ jobs:
       - name: Sign binary
         uses: lando/code-sign-action@v2
         with:
-          file: build/x86_64-pc-windows-msvc/release/install/${{ env.FILENAME }}
+          file: build/x86_64-pc-windows-msvc/release/install/${{ env.FILENAME }}.exe
           certificate-data: ${{ secrets.DFIR_DD_CERTIFICATE }}
           certificate-password: ${{ secrets.CERT_PASSWORD }}
       
