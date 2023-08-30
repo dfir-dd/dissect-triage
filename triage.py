@@ -37,8 +37,20 @@ def main():
     sys.argv.append("--handles")
     sys.argv.append("local")
     
+    old_stdout = sys.stdout
+    old_stderr = sys.stderr
+    
+    outfile = open("C:\\Dev\\acquire_log.log", "w")
+    errfile = open("C:\\Dev\\acquire_err.log", "w")
+    sys.stdout = outfile
+    sys.stderr = errfile
+    
     acquire.main()
 
+    sys.stdout = old_stdout
+    sys.stderr = old_stderr
+    outfile.close()
+    errfile.close()
 
 if __name__ == '__main__':
     main()
