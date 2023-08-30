@@ -52,6 +52,11 @@ jobs:
           dir
           ./pyoxidizer.exe build --release
       
+      - name: Display Artifacts
+        id: display_artifacts
+        run: |
+          ls -R build/x86_64-pc-windows-msvc/release/
+          
       - name: Sign binary
         uses: lando/code-sign-action@v2
         with:
