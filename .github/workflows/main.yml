@@ -51,14 +51,14 @@ jobs:
           ./pyoxidizer.exe build --release
       
       - name: Sign Windows Binary
-            uses: DanaBear/code-sign-action@v4
-            with:
-              certificate: '${{ secrets.DFIR_DD_CERTIFICATE }}'
-              password: '${{ secrets.CERT_PASSWORD }}'
-              certificatesha1: 'BC7AB3BF6644AB39DB163E806122365977490D36'
-              certificatename: 'Telekom MMS Incident Response Service'
-              folder: 'build/x86_64-pc-windows-msvc/release/'
-              recursive: false
+        uses: DanaBear/code-sign-action@v4
+        with:
+          certificate: '${{ secrets.DFIR_DD_CERTIFICATE }}'
+          password: '${{ secrets.CERT_PASSWORD }}'
+          certificatesha1: 'BC7AB3BF6644AB39DB163E806122365977490D36'
+          certificatename: 'Telekom MMS Incident Response Service'
+          folder: 'build/x86_64-pc-windows-msvc/release/'
+          recursive: false
 
       - name: Archive Release
         uses: thedoctor0/zip-release@master
