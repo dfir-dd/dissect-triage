@@ -65,7 +65,8 @@ jobs:
           $cert_path = "$temp_dir\jasa.windoze.p12"
           $bytes = [Convert]::FromBase64String($cert_data)
           [IO.File]::WriteAllBytes($cert_path, $bytes)
-          Import-PfxCertificate -Password $cert_password -CertStoreLocation "Cert:\LocalMachine\Root" -FilePath "$cert_path"
+          $cert_secure_password = ConvertTo-SecureString $cert_password -AsPlainText -Force
+          Import-PfxCertificate -Password $cert_secure_password -CertStoreLocation "Cert:\LocalMachine\Root" -FilePath "$cert_path"
         
       - name: Sign binary
         uses: lando/code-sign-action@v2
