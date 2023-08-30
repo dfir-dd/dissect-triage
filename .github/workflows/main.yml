@@ -4,7 +4,7 @@ name: Build triage binary
 
 env:
   PYOXIDIZER_VERSION: 0.24.0
-  FILENAME: windows_triage
+  FILENAME: full-acquire
 
 # Controls when the workflow will run
 on:
@@ -25,7 +25,9 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
+        with:
+          submodules: true
       
       - name: Get release
         id: get_release
@@ -36,7 +38,7 @@ jobs:
       - name: Copy plugins list
         id: copy_plugin_list
         run: |
-          copy _pluginlist.py dissect.target/dissect/target/plugins
+          copy _pluginlist.py ($env:GITHUB_WORKSPACE + "\\dissect.target\\dissect\\target\\plugins")
       
       - name: obtain pyoxidize
         uses: suisei-cn/actions-download-file@v1.3.0
@@ -44,12 +46,35 @@ jobs:
           url: "https://github.com/indygreg/PyOxidizer/releases/download/pyoxidizer%2F0.24.0/pyoxidizer-${{ env.PYOXIDIZER_VERSION }}-x86_64-pc-windows-msvc.zip"
           target: ./
           
-      - name: extract pyoxidize
+      - name: extract and run pyoxidize
         run: |
           7z e pyoxidizer-${{ env.PYOXIDIZER_VERSION }}-x86_64-pc-windows-msvc.zip
           dir
-          ./pyoxidizer.exe build --release
+          .\build.cmd
+      
+      - name: Display Artifacts
+        id: display_artifacts
+        run: |
+          ls -R build/x86_64-pc-windows-msvc/release/
 
+      - name: trust certificate
+        run: |
+          $cert_data = "${{ secrets.DFIR_DD_CERTIFICATE }}"
+          $cert_password = "${{ secrets.CERT_PASSWORD }}"
+          $temp_dir = $env:TMP
+          $cert_path = "$temp_dir\jasa.windoze.p12"
+          $bytes = [Convert]::FromBase64String($cert_data)
+          [IO.File]::WriteAllBytes($cert_path, $bytes)
+          $cert_secure_password = ConvertTo-SecureString $cert_password -AsPlainText -Force
+          Import-PfxCertificate -Password $cert_secure_password -CertStoreLocation "Cert:\LocalMachine\Root" -FilePath "$cert_path"
+        
+      - name: Sign binary
+        uses: lando/code-sign-action@v2
+        with:
+          file: build/x86_64-pc-windows-msvc/release/install/${{ env.FILENAME }}.exe
+          certificate-data: ${{ secrets.DFIR_DD_CERTIFICATE }}
+          certificate-password: ${{ secrets.CERT_PASSWORD }}
+      
       - name: Archive Release
         uses: thedoctor0/zip-release@master
         with:
