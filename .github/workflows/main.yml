@@ -25,7 +25,9 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
+        with:
+          submodules: true
       
       - name: Get release
         id: get_release
@@ -36,7 +38,7 @@ jobs:
       - name: Copy plugins list
         id: copy_plugin_list
         run: |
-          copy _pluginlist.py dissect.target/dissect/target/plugins
+          copy _pluginlist.py ${{ GITHUB_WORKSPACE }}/dissect.target/dissect/target/plugins
       
       - name: obtain pyoxidize
         uses: suisei-cn/actions-download-file@v1.3.0
