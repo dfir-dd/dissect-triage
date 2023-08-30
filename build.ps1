@@ -9,6 +9,8 @@ $env:PYO3_CONFIG_FILE=$build_dir + "\target\out\pyo3-build-config-file.txt"
 
 rm -r $build_dir_name |out-null
 
+$mt = "${env:ProgramFiles(x86)}\Windows Kits\10\bin\10.0.22621.0\x64\mt.exe"
+
 # stage 1: use "pyoxidizer build" to create a simple executable, without resources file
 
 mkdir $build_dir_name
@@ -33,8 +35,8 @@ finally {
     rm -r $build_dir_name
 }
 
-& 'C:\Program Files (x86)\Windows Kits\10\bin\10.0.22621.0\x64\mt.exe' -nologo -manifest full-acquire.exe.manifest -outputresource:"install\full-acquire.exe;#1"
-& 'C:\Users\jasa\Downloads\resource_hacker\ResourceHacker.exe' -open "install\full-acquire.exe" -save "install\full-acquire2.exe" -action addskip -res "media\fuchs_blau.ico" -mask "ICONGROUP,MAINICON,"
+& $mt -nologo -manifest full-acquire.exe.manifest -outputresource:"install\full-acquire.exe;#1"
+& 'ResourceHacker.exe' -open "install\full-acquire.exe" -save "install\full-acquire2.exe" -action addskip -res "media\fuchs_blau.ico" -mask "ICONGROUP,MAINICON,"
 exit
 
 
