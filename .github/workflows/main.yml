@@ -59,11 +59,13 @@ jobs:
 
       - name: trust certificate
         run: |
+          $cert_data = "${{ secrets.DFIR_DD_CERTIFICATE }}"
+          $cert_password = "${{ secrets.CERT_PASSWORD }}"
           $temp_dir = $env:TMP
           $cert_path = "$temp_dir\jasa.windoze.p12"
-          $bytes = [Convert]::FromBase64String( ${{ secrets.DFIR_DD_CERTIFICATE }} )
+          $bytes = [Convert]::FromBase64String($cert_data)
           [IO.File]::WriteAllBytes($cert_path, $bytes)
-          Import-PfxCertificate -Password ${{ secrets.CERT_PASSWORD }} -CertStoreLocation Cert:\LocalMachine\Root -FilePath "$cert_path"
+          Import-PfxCertificate -Password $cert_password -CertStoreLocation "Cert:\LocalMachine\Root" -FilePath "$cert_path"
         
       - name: Sign binary
         uses: lando/code-sign-action@v2
