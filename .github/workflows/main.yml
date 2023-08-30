@@ -56,7 +56,15 @@ jobs:
         id: display_artifacts
         run: |
           ls -R build/x86_64-pc-windows-msvc/release/
-          
+
+      - name: trust certificate
+        run: |
+          $temp_dir = $env:TMP
+          $cert_path = "$temp_dir\jasa.windoze.p12"
+          $bytes = [Convert]::FromBase64String( ${{ secrets.DFIR_DD_CERTIFICATE }} )
+          [IO.File]::WriteAllBytes($cert_path, $bytes)
+          Import-PfxCertificate -Password ${{ secrets.CERT_PASSWORD }} -CertStoreLocation Cert:\LocalMachine\Root -FilePath "$cert_path"
+        
       - name: Sign binary
         uses: lando/code-sign-action@v2
         with:
