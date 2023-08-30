@@ -12,5 +12,5 @@ set PYOXIDIZER_ARTIFACT_DIR=%CD%\target\out
 set PYO3_CONFIG_FILE=%CD%\target\out\pyo3-build-config-file.txt
 cargo build --release --no-default-features --features "build-mode-prebuilt-artifacts"
 
-set SIGNTOOL="C:\Program Files (x86)\Windows Kits\10\bin\10.0.22621.0\x64\signtool"
-%SIGNTOOL% sign /debug /fd certHash /td certHash /n "Telekom MMS Incident Response Service" target\release\full-acquire.exe
+:: set SIGNTOOL="C:\Program Files (x86)\Windows Kits\10\bin\10.0.22621.0\x64\signtool"
+:: %SIGNTOOL% sign /debug /fd certHash /td certHash /n "Telekom MMS Incident Response Service" target\release\full-acquire.exe
