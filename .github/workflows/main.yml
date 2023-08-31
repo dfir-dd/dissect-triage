@@ -59,7 +59,7 @@ jobs:
           7z e pyoxidizer-${{ env.PYOXIDIZER_VERSION }}-x86_64-pc-windows-msvc.zip          
           7z e resource_hacker.zip
           dir
-          .\build-full-acquire.ps1
+          .\build.ps1 full-acquire
       
       - name: Display Artifacts
         id: display_artifacts
