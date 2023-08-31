@@ -108,7 +108,7 @@ jobs:
           asset_content_type: application/zip
       
       - name: Calculate checksums
-        run: sha256sum ${{ env.FILENAME }}-${{ steps.get_release.outputs.tag_name }}.zip >${{ env.FILENAME }}-${{ steps.get_release.outputs.tag_name }}.sha256sum
+        run: sha256sum C:\\${{ env.FILENAME }}-${{ steps.get_release.outputs.tag_name }}.zip >${{ env.FILENAME }}-${{ steps.get_release.outputs.tag_name }}.sha256sum
 
       - name: Upload checksum
         id: upload-hashfile
