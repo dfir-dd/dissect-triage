@@ -35,9 +35,7 @@ try {
 
     Push-Location $build_dir_name
 
-    $ErrorActionPreference = 'Continue'
-    pyoxidizer build --release 3>&1 2>&1
-    $ErrorActionPreference = 'Stop'
+    Start-Process "..\pyoxidizer.exe" -Wait -NoNewWindow -ArgumentList @("build", "--release")
     Write-Host -ForegroundColor Green "Created a triage binary"
 
     copy -R build\x86_64-pc-windows-msvc\release\install ..
