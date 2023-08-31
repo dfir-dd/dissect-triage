@@ -89,7 +89,7 @@ jobs:
         with:
           type: 'zip'
           directory: ${{ env.FILENAME }}
-          filename: ${{ env.FILENAME }}-${{ steps.get_release.outputs.tag_name }}.zip
+          filename: ${{ env.GITHUB_WORKSPACE }}/${{ env.FILENAME }}-${{ steps.get_release.outputs.tag_name }}.zip
           exclusions: '*.git* /*node_modules/* .editorconfig'
 
       #- name: move archive to here
@@ -103,7 +103,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.get_release.outputs.upload_url }} 
-          asset_path: ./${{ env.FILENAME }}-${{ steps.get_release.outputs.tag_name }}.zip
+          asset_path: ${{ env.GITHUB_WORKSPACE }}/${{ env.FILENAME }}-${{ steps.get_release.outputs.tag_name }}.zip
           asset_name: ${{ env.FILENAME }}-${{ steps.get_release.outputs.tag_name }}.zip
           asset_content_type: application/zip
       
