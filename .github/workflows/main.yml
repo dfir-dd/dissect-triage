@@ -37,6 +37,14 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ github.token }}
 
+      - name: obtain latest release of dissect.target
+        run: |
+          cd $env:GITHUB_WORKSPACE
+          git clone https://github.com/fox-it/dissect.target.git
+          Push-Location dissect.target
+          git checkout "3.11.1"
+          Pop-Location
+
       - name: Copy plugins list
         id: copy_plugin_list
         run: |
