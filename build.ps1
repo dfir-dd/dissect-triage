@@ -28,7 +28,6 @@ if (Test-Path -Path ($PSScriptRoot + "\install")) {
 mkdir $build_dir_name
 try {
     copy pyoxidizer.bzl $build_dir_name
-    copy build.rs $build_dir_name
     copy ($build_dir_name + "-manifest.rc") $build_dir_name
     copy ($build_dir_name + ".exe.manifest") $build_dir_name
     copy $powershell_script $build_dir_name\triage.py
