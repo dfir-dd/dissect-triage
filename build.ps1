@@ -9,7 +9,7 @@ if (-not(Test-Path -Path $powershell_script)) {
 $build_dir=$PSScriptRoot + "\" + $build_dir_name
 $env:CARGO_MANIFEST_DIR=$build_dir
 $env:TARGET="x86_64-pc-windows-msvc"
-$env:PROFILE="release"
+$env:PROFILE="debug"
 $env:OUT_DIR=$build_dir + "\target\out"
 $env:PYOXIDIZER_ARTIFACT_DIR=$env:OUT_DIR
 $env:PYO3_CONFIG_FILE=$build_dir + "\target\out\pyo3-build-config-file.txt"
@@ -34,10 +34,10 @@ try {
 
     Push-Location $build_dir_name
 
-    Start-Process "..\pyoxidizer.exe" -Wait -NoNewWindow -ArgumentList @("build", "--release")
+    Start-Process "..\pyoxidizer.exe" -Wait -NoNewWindow -ArgumentList @("build", ("--" + $env:PROFILE) )
     Write-Host -ForegroundColor Green "Created a triage binary"
 
-    copy -R build\x86_64-pc-windows-msvc\release\install ..
+    copy -R build\x86_64-pc-windows-msvc\$env:PROFILE\install ..
 } catch {
     Write-Host "An error occurred:"
     Write-Error $_
