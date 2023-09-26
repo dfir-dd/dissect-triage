@@ -49,7 +49,7 @@ finally {
 
 try {
     Push-Location install
-    & $mt -nologo -manifest ("..\" + $build_dir_name + ".exe.manifest") -outputresource:($build_dir_name + ".exe;#1")
+    # & $mt -nologo -manifest ("..\" + $build_dir_name + ".exe.manifest") -outputresource:($build_dir_name + ".exe;#1")
 
     Write-Host -ForegroundColor Green "Added manifest successfully"
 
