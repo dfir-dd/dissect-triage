@@ -4,7 +4,7 @@ name: Build triage binary
 
 env:
   PYOXIDIZER_VERSION: 0.24.0
-  FILENAME: full-acquire
+  FILENAME: full_acquire
 
 # Controls when the workflow will run
 on:
@@ -67,7 +67,7 @@ jobs:
           7z e pyoxidizer-${{ env.PYOXIDIZER_VERSION }}-x86_64-pc-windows-msvc.zip          
           7z e resource_hacker.zip
           dir
-          .\build.ps1 full-acquire
+          .\build.ps1 full_acquire
       
       - name: Display Artifacts
         id: display_artifacts
