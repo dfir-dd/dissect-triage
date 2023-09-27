@@ -34,7 +34,12 @@ try {
 
     Push-Location $build_dir_name
 
-    Start-Process "..\pyoxidizer.exe" -Wait -NoNewWindow -ArgumentList @("build", ("--" + $env:PROFILE) )
+    if ($env:PROFILE -eq "release") {
+        Start-Process "..\pyoxidizer.exe" -Wait -NoNewWindow -ArgumentList @("build", "--release" )
+    } else {
+        Start-Process "..\pyoxidizer.exe" -Wait -NoNewWindow -ArgumentList @("build" )
+    }
+    
     Write-Host -ForegroundColor Green "Created a triage binary"
 
     copy -R build\x86_64-pc-windows-msvc\$env:PROFILE\install ..
