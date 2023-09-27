@@ -9,7 +9,7 @@ if (-not(Test-Path -Path $powershell_script)) {
 $build_dir=$PSScriptRoot + "\" + $build_dir_name
 $env:CARGO_MANIFEST_DIR=$build_dir
 $env:TARGET="x86_64-pc-windows-msvc"
-$env:PROFILE="debug"
+$env:PROFILE="release"
 $env:OUT_DIR=$build_dir + "\target\out"
 $env:PYOXIDIZER_ARTIFACT_DIR=$env:OUT_DIR
 $env:PYO3_CONFIG_FILE=$build_dir + "\target\out\pyo3-build-config-file.txt"
