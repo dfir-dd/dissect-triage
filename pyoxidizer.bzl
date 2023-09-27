@@ -10,7 +10,8 @@ def make_exe():
     # Obtain the default PythonDistribution for our build target. We link
     # this distribution into our produced executable and extract the Python
     # standard library from it.
-    dist = default_python_distribution('standalone_dynamic')
+    # dist = default_python_distribution('standalone_dynamic')
+    dist = default_python_distribution()
 
     # This function creates a `PythonPackagingPolicy` instance, which
     # influences how executables are built and how resources are added to
@@ -87,7 +88,7 @@ def make_exe():
     # an optional fallback.
 
     # Use in-memory location for adding resources by default.
-    policy.resources_location = "in-memory"
+    # policy.resources_location = "in-memory"
 
     # Use filesystem-relative location for adding resources by default.
     # policy.resources_location = "filesystem-relative:prefix"
@@ -194,7 +195,7 @@ def make_exe():
 
     # Run a Python module as __main__ when the interpreter starts.
     # python_config.run_module = "acquire.acquire"
-    python_config.run_module = "full_acquire"
+    python_config.run_module = "triage"
 
     # Run a Python file when the interpreter starts.
     # python_config.run_filename = "triage.py"
@@ -203,7 +204,7 @@ def make_exe():
     # resources, and other options. The returned object represents the
     # standalone executable that will be built.
     exe = dist.to_python_executable(
-        name="full_acquire",
+        name="triage",
 
         # If no argument passed, the default `PythonPackagingPolicy` for the
         # distribution is used.
@@ -259,7 +260,7 @@ def make_exe():
     # Python packages.
     exe.add_python_resources(exe.read_package_root(
         path="./",
-        packages=["full_acquire"],
+        packages=["triage"],
     ))
 
     # Discover Python files from a virtualenv and add them to our embedded

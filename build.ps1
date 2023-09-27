@@ -15,6 +15,7 @@ $env:PYOXIDIZER_ARTIFACT_DIR=$env:OUT_DIR
 $env:PYO3_CONFIG_FILE=$build_dir + "\target\out\pyo3-build-config-file.txt"
 
 $mt = "${env:ProgramFiles(x86)}\Windows Kits\10\bin\10.0.22621.0\x64\mt.exe"
+$signtool = "${env:ProgramFiles(x86)}\Windows Kits\10\bin\10.0.22621.0\x64\signtool.exe"
 
 if (Test-Path -Path $build_dir_name) {
     rm -r $build_dir_name |out-null
@@ -54,11 +55,11 @@ finally {
 
 try {
     Push-Location install
-    # & $mt -nologo -manifest ("..\" + $build_dir_name + ".exe.manifest") -outputresource:($build_dir_name + ".exe;#1")
+    & $mt -nologo -manifest ("..\" + $build_dir_name + ".exe.manifest") -outputresource:($build_dir_name + ".exe;#1")
 
     Write-Host -ForegroundColor Green "Added manifest successfully"
 
-    Rename-Item ($build_dir_name + ".exe") ($build_dir_name + "_old.exe")
+    Rename-Item ("triage.exe") ($build_dir_name + "_old.exe")
     $procOptions = @{
         FilePath = '..\ResourceHacker.exe'
         Wait = $true
@@ -69,6 +70,9 @@ try {
     Write-Host -ForegroundColor Green "Added icon successfully"
 
     Remove-Item ($build_dir_name + "_old.exe")
+	
+	# sign the exe file. this is required if the signing is not done by the github action
+	# & $signtool sign /debug /fd certHash /td certHash /n "Telekom MMS Incident Response Service" ($build_dir_name + ".exe")
 } catch {
     Write-Host "An error occurred:"
     Write-Error $_
