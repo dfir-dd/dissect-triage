@@ -203,7 +203,7 @@ def make_exe():
     # resources, and other options. The returned object represents the
     # standalone executable that will be built.
     exe = dist.to_python_executable(
-        name="full-acquire",
+        name="full_acquire",
 
         # If no argument passed, the default `PythonPackagingPolicy` for the
         # distribution is used.
