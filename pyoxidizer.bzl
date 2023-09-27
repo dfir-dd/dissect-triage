@@ -194,7 +194,7 @@ def make_exe():
 
     # Run a Python module as __main__ when the interpreter starts.
     # python_config.run_module = "acquire.acquire"
-    python_config.run_module = "full-acquire"
+    python_config.run_module = "full_acquire"
 
     # Run a Python file when the interpreter starts.
     # python_config.run_filename = "triage.py"
@@ -259,7 +259,7 @@ def make_exe():
     # Python packages.
     exe.add_python_resources(exe.read_package_root(
         path="./",
-        packages=["full-acquire"],
+        packages=["full_acquire"],
     ))
 
     # Discover Python files from a virtualenv and add them to our embedded
