@@ -71,8 +71,6 @@ try {
 
     Remove-Item ($build_dir_name + "_old.exe")
 	
-	# sign the exe file. this is required if the signing is not done by the github action
-	# & $signtool sign /debug /fd certHash /td certHash /n "Telekom MMS Incident Response Service" ($build_dir_name + ".exe")
 } catch {
     Write-Host "An error occurred:"
     Write-Error $_
